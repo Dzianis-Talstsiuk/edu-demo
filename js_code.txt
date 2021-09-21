@@ -1,0 +1,33 @@
+let fs = require('fs-extra');
+fs.mkdir('folder1', function(failed) {
+    if (failed) {
+        console.log('Error');
+    } else {
+        console.log('The 1st folder was created!');} 
+});
+fs.writeFile("folder1/new.txt", "something should be here", function(err) {
+    if(err) {
+        console.log('Error');
+    } else {
+        console.log('The file was saved!');
+    }
+}); 
+fs.mkdir('folder2', function(error) {
+    if (error) {
+        console.log('Error');
+    } else {
+        console.log('The 2nd folder was created!'); 
+    } 
+});
+fs.move('folder1/new.txt', 'folder2/new.txt', function (forw) { 
+    if (forw) {
+        console.log('Forward issue');
+    } else {
+    console.log('Forward has been completed!');
+    }
+fs.unlink("folder2/new.txt", () => {
+   console.log("File has been deleted!");
+});
+fs.removeSync('folder1');
+fs.removeSync('folder2');
+});
